@@ -1,0 +1,10 @@
+management:
+  security:
+    enabled: false
+  health:
+    db:
+      enabled: false
+
+security:
+  basic:
+    enabled: false

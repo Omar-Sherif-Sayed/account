@@ -1,0 +1,22 @@
+services:
+  redis:
+    image: 'redis:latest'
+    restart: unless-stopped
+    ports:
+      - '6379'
+  sqlserver:
+    image: 'mcr.microsoft.com/mssql/server:latest'
+    restart: unless-stopped
+    environment:
+      - 'ACCEPT_EULA=yes'
+      - 'MSSQL_PID=express'
+      - 'MSSQL_SA_PASSWORD=verYs3cret'
+    ports:
+      - '1433'
+  sonarqube:
+    image: 'sonarqube:lts'
+    restart: unless-stopped
+    ports:
+      - 9000:9000
+    environment:
+      - 'SONAR_FORCEAUTHENTICATION=false'

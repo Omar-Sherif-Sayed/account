@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: account
+  #  datasource:
+  #    url: jdbc:ucanaccess:@basedir@/src/main/resources/accountsdb.accdb;openExclusive=false;ignoreCase=true
+  #    url: jdbc:ucanaccess:classpath:src/main/resources/data/accountsdb.accdb;openExclusive=false;ignoreCase=true
+  #    url: jdbc:ucanaccess://C:\Programming\WorkSpaces\Interviews\Nagarro JavaTest.zip[54]\JavaTest\account\src\main\resources\data\accountsdb.accdb;openExclusive=false;ignoreCase=true
+  #    driver-class-name: net.ucanaccess.jdbc.UcanaccessDriver
+  jpa:
+    show-sql: false
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServerDialect
+  main:
+    allow-bean-definition-overriding: true
+
+server:
+  port: 8070
+  servlet:
+    context-path: /api/account
+
+springdoc:
+  packagesToScan: com.nagarro.account.controller
+  pathsToMatch: /v1/**
+
+log4j2:
+  skipJansi: false
+
+security:
+  admin:
+    password: admin
+  user:
+    password: user
+  jwt:
+    secret-key: gaYa9QHU4JR1t2Ty0_ZPwrsq1oHgKdFbeIHcDH4B_dw
+    token-prefix: 'Bearer '
+    token-expiration-after-minutes: 5

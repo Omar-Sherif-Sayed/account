@@ -24,6 +24,7 @@ import java.io.IOException;
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
     private final Logger logger = LogManager.getLogger(CustomAccessDeniedHandler.class);
+
     private final ExceptionHandlerUtil exceptionHandlerUtil;
 
     @Override
@@ -32,9 +33,10 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
                        AccessDeniedException accessDeniedException) throws IOException, ServletException {
 
         var auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null) {
-            logger.log(Level.WARN, "User: {} attempted to access the protected URL: {}", auth.getName(), request.getRequestURI());
-        }
+
+        if (auth != null)
+            logger.log(Level.WARN, "User: {} attempted to access the protected URL: {}",
+                    auth.getName(), request.getRequestURI());
 
         response.setStatus(HttpStatus.FORBIDDEN.value());
         ResponseEntity<BaseError> baseErrorResponseEntity = exceptionHandlerUtil
@@ -45,7 +47,6 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
                         .build());
 
         response.getWriter().println(new Gson().toJson(baseErrorResponseEntity.getBody()));
-
     }
 
 }

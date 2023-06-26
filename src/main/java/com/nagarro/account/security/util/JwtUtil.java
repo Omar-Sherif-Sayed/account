@@ -52,10 +52,6 @@ public class JwtUtil {
 
         var now = DateUtil.getCairoZonedLocalDateTime();
         var expirationDateSeconds = now.plusMinutes(jwtConfig.getTokenExpirationAfterMinutes());
-//
-//        String role = authorities.stream().findFirst().map(GrantedAuthority::getAuthority).orElse(null);
-//
-//        assert role != null;
 
         return Jwts.builder()
                 .setSubject(subject)

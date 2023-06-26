@@ -35,9 +35,9 @@
             <AppenderRef ref="RollingFile"/>
         </Root>
 
-        <!-- LOG "com.family.court*" at TRACE level -->
+        <!-- LOG "com.nagarro.account*" at TRACE level -->
         <Logger name="org.springframework.web" level="INFO"/>
-        <Logger name="guc.family.ppo.court" level="TRACE"/>
+        <Logger name="com.nagarro.account" level="TRACE"/>
         <Logger name="org.hibernate" level="ERROR"/>
     </Loggers>
 

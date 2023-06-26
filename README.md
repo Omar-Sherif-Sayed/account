@@ -27,7 +27,7 @@ with 3 APIs Login, Logout and search.
 
 ### How to run the project
 
-- Install Java 17 link[]
+- Install Java 17
 - Install Intellij
 - Install Docker
 - Install Gradle

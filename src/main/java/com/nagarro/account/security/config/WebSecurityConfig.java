@@ -58,7 +58,7 @@ public class WebSecurityConfig {
 //                )
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(SecurityUtil.antMatchers).permitAll()
-//                        .requestMatchers("/v1/search").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/v1/search").hasAnyRole("ADMIN", "USER")
                         .anyRequest().authenticated()
                 )
 

@@ -26,7 +26,7 @@ public class AccountController {
 
     @GetMapping("/search")
     @ApiResponse(responseCode = "200")
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     public ResponseEntity<BaseResponse<List<AccountResponse>>> search(@RequestParam(required = false) Long accountId,
                                                                       @RequestParam(required = false) LocalDate dateFrom,
                                                                       @RequestParam(required = false) LocalDate dateTo,

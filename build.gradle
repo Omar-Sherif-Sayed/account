@@ -36,17 +36,16 @@ dependencyManagement {
 dependencies {
     // data sources
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-    runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
     implementation 'net.sf.ucanaccess:ucanaccess:5.0.1'
+    runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
 
     // starters
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
     implementation 'org.springframework.boot:spring-boot-configuration-processor'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
     // Logging
     implementation 'org.springframework.boot:spring-boot-starter-log4j2'
@@ -59,14 +58,15 @@ dependencies {
     testImplementation 'org.testcontainers:junit-jupiter:1.17.3'
 
     // Lombok
-    compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok'
 
     // Security and JWT
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.security:spring-security-config'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.2'
     implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
-    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.2'
 
     // OpenAPI
     implementation 'org.springframework.boot:spring-boot-starter-validation'
@@ -74,8 +74,8 @@ dependencies {
     implementation 'org.springdoc:springdoc-openapi-ui:1.6.7'
 
     // other
-    compileOnly 'jakarta.servlet:jakarta.servlet-api:6.0.0'
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.15.2'
+    compileOnly 'jakarta.servlet:jakarta.servlet-api:6.0.0'
     implementation 'com.google.code.gson:gson:2.8.9'
 
 }

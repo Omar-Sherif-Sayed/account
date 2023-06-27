@@ -24,11 +24,13 @@ public class InMemoryUserDetailsService {
 
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
-        UserDetails admin = User.withUsername("admin")
+        UserDetails admin = User
+                .withUsername("admin")
                 .password(passwordEncoder.encode(adminPassword))
                 .roles("ADMIN")
                 .build();
-        UserDetails user = User.withUsername("user")
+        UserDetails user = User
+                .withUsername("user")
                 .password(passwordEncoder.encode(userPassword))
                 .roles("USER")
                 .build();

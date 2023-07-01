@@ -17,12 +17,6 @@ import org.springframework.context.annotation.Configuration;
 )
 public class OpenApiConfig {
 
-//    @Bean
-//    public OpenAPI openApiSpec() {
-//        return new OpenAPI().components(new Components().addSecuritySchemes("bearer-jwt",
-//                new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")));
-//    }
-
     @Bean
     public OpenAPI openApiSpec() {
         return new OpenAPI()

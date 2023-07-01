@@ -118,7 +118,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8070/api/account/v1/search?accountId=1&dateFrom=2015-10-14&dateTo=2021-10-14&amountFrom=194.1&amountTo=500.595",
+							"raw": "localhost:8070/api/account/v1/account/search?accountId=1&dateFrom=2015-10-14&dateTo=2021-10-14&amountFrom=194.1&amountTo=500.595",
 							"host": [
 								"localhost"
 							],
@@ -127,6 +127,7 @@
 								"api",
 								"account",
 								"v1",
+								"account",
 								"search"
 							],
 							"query": [

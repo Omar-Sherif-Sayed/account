@@ -11,7 +11,7 @@ import javax.sql.DataSource;
 public class DatabaseConfig {
 
     @Bean
-    public DataSource primaryDataSource(DataSourceProperties properties) {
+    public DataSource dataSource(DataSourceProperties properties) {
         String classpath = System.getProperty("user.dir");
         properties.setUrl("jdbc:ucanaccess://" + classpath + "\\src\\main\\resources\\data\\accountsdb.accdb");
         properties.setDriverClassName("net.ucanaccess.jdbc.UcanaccessDriver");

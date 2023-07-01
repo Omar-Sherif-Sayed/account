@@ -19,6 +19,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -50,7 +51,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             var body = claimsJws.getBody();
             String username = body.getSubject();
-            List<Map<String, String>> authorities = (List<Map<String, String>>) body.get("authorities");
+            List<Map<String, String>> authorities = getAuthorities(body);
 
             Set<SimpleGrantedAuthority> simpleGrantedAuthorities = authorities.stream()
                     .map(m -> new SimpleGrantedAuthority(m.get("authority")))
@@ -68,6 +69,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         }
 
+    }
+
+    private List<Map<String, String>> getAuthorities(Claims body) {
+        try {
+            return (List<Map<String, String>>) body.get("authorities");
+        } catch (Exception e) {
+            return Collections.emptyList();
+        }
     }
 
 }

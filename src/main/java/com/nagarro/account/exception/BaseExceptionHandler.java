@@ -27,26 +27,4 @@ public class BaseExceptionHandler {
                         .build());
     }
 
-//    @ResponseBody
-//    @ExceptionHandler(value = Exception.class)
-//    public ResponseEntity<BaseError> exceptionHandler(Exception exception) {
-//        if (exception instanceof BaseException baseException) {
-//            return exceptionHandlerUtil
-//                    .commonReturn(BaseException
-//                            .builder()
-//                            .errorCode(baseException.getErrorCode())
-//                            .httpStatus(baseException.getHttpStatus())
-//                            .detail(baseException.getDetail())
-//                            .build());
-//        } else {
-//            return
-//                    ResponseEntity.badRequest().body(new BaseError(null,
-//                            exception.getCause().toString(),
-//                            exception.getCause().toString(),
-//                            exception.getMessage())
-//                    );
-//        }
-//
-//    }
-
 }

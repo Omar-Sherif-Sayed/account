@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>WebSecurityConfig.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">account</a> &gt; <a href="index.source.html" class="el_package">com.nagarro.account.security.config</a> &gt; <span class="el_source">WebSecurityConfig.java</span></div><h1>WebSecurityConfig.java</h1><pre class="source lang-java linenums">package com.nagarro.account.security.config;
+
+
+import com.nagarro.account.exception.util.ExceptionHandlerUtil;
+import com.nagarro.account.security.auth.ApplicationUserService;
+import com.nagarro.account.security.exception.CustomAccessDeniedHandler;
+import com.nagarro.account.security.exception.CustomAuthenticationFailureHandler;
+import com.nagarro.account.security.filter.JwtAuthenticationFilter;
+import com.nagarro.account.security.util.SecurityUtil;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+
+import java.util.List;
+
+@Configuration
+@EnableWebSecurity
+@EnableMethodSecurity
+<span class="fc" id="L35">@RequiredArgsConstructor</span>
+public class WebSecurityConfig {
+
+    private final PasswordEncoder passwordEncoder;
+    private final ExceptionHandlerUtil exceptionHandlerUtil;
+    private final ApplicationUserService applicationUserService;
+    private final AuthenticationConfiguration authConfiguration;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    @Bean
+    public AuthenticationManager authenticationManager() throws Exception {
+<span class="fc" id="L46">        return authConfiguration.getAuthenticationManager();</span>
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+<span class="fc" id="L51">        http</span>
+<span class="fc" id="L52">                .csrf(AbstractHttpConfigurer::disable)</span>
+<span class="fc" id="L53">                .cors(AbstractHttpConfigurer::disable)</span>
+<span class="fc" id="L54">                .sessionManagement(httpSecuritySessionManagementConfigurer -&gt;</span>
+<span class="fc" id="L55">                        httpSecuritySessionManagementConfigurer</span>
+<span class="fc" id="L56">                                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)</span>
+                )
+<span class="fc" id="L58">                .authorizeHttpRequests(auth -&gt; auth</span>
+<span class="fc" id="L59">                        .requestMatchers(SecurityUtil.antMatchers).permitAll()</span>
+<span class="fc" id="L60">                        .anyRequest().authenticated()</span>
+                )
+<span class="fc" id="L62">                .authenticationProvider(daoAuthenticationProvider())</span>
+<span class="fc" id="L63">                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);</span>
+<span class="fc" id="L64">        return http.build();</span>
+    }
+
+
+    @Bean
+    public DaoAuthenticationProvider daoAuthenticationProvider() {
+<span class="fc" id="L70">        var provider = new DaoAuthenticationProvider();</span>
+<span class="fc" id="L71">        provider.setPasswordEncoder(passwordEncoder);</span>
+<span class="fc" id="L72">        provider.setUserDetailsService(applicationUserService);</span>
+<span class="fc" id="L73">        return provider;</span>
+    }
+
+    @Bean
+    public AuthenticationFailureHandler authenticationFailureHandler() {
+<span class="fc" id="L78">        return new CustomAuthenticationFailureHandler();</span>
+    }
+
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+<span class="fc" id="L83">        return new CustomAccessDeniedHandler(exceptionHandlerUtil);</span>
+    }
+
+    @Bean
+    public CorsFilter corsFilter() {
+<span class="fc" id="L88">        var source = new UrlBasedCorsConfigurationSource();</span>
+<span class="fc" id="L89">        var config = new CorsConfiguration();</span>
+<span class="fc" id="L90">        config.setAllowCredentials(true);</span>
+<span class="fc" id="L91">        config.addAllowedHeader(&quot;*&quot;);</span>
+<span class="fc" id="L92">        config.addExposedHeader(&quot;*&quot;);</span>
+<span class="fc" id="L93">        config.addAllowedOriginPattern(&quot;*&quot;);</span>
+<span class="fc" id="L94">        config.addAllowedMethod(&quot;OPTIONS&quot;);</span>
+<span class="fc" id="L95">        config.addAllowedMethod(&quot;GET&quot;);</span>
+<span class="fc" id="L96">        config.addAllowedMethod(&quot;POST&quot;);</span>
+<span class="fc" id="L97">        config.addAllowedMethod(&quot;PUT&quot;);</span>
+<span class="fc" id="L98">        config.addAllowedMethod(&quot;PATCH&quot;);</span>
+<span class="fc" id="L99">        config.addAllowedMethod(&quot;DELETE&quot;);</span>
+<span class="fc" id="L100">        config.setAllowedMethods(List.of(&quot;*&quot;, &quot;GET&quot;, &quot;POST&quot;, &quot;PUT&quot;, &quot;PUT&quot;, &quot;OPTIONS&quot;, &quot;PATCH&quot;, &quot;DELETE&quot;));</span>
+<span class="fc" id="L101">        config.setAllowedHeaders(SecurityUtil.allowedHeaders);</span>
+<span class="fc" id="L102">        config.setExposedHeaders(SecurityUtil.allowedHeaders);</span>
+<span class="fc" id="L103">        config.setAllowedOrigins(List.of(&quot;*&quot;));</span>
+<span class="fc" id="L104">        config.setAllowedOriginPatterns(List.of(&quot;*&quot;));</span>
+<span class="fc" id="L105">        source.registerCorsConfiguration(&quot;/**&quot;, config);</span>
+<span class="fc" id="L106">        return new CorsFilter(source);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

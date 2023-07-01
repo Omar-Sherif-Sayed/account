@@ -18,7 +18,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/v1")
+@RequestMapping("/v1/account")
 @SecurityRequirement(name = "Bearer Authentication")
 public class AccountController {
 

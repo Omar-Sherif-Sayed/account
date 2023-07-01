@@ -55,7 +55,9 @@ dependencies {
     // unit test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
+//    testImplementation 'org.junit.vintage:junit-vintage-engine:5.9.3'
     testImplementation 'org.testcontainers:junit-jupiter:1.17.3'
+    testImplementation 'com.h2database:h2'
 
     // Lombok
     annotationProcessor 'org.projectlombok:lombok'
@@ -91,9 +93,9 @@ jacocoTestReport {
         xml.enabled true
         csv.enabled true
         html.enabled true
-//        reportPath "src/main/resources/reports/"
-//        html.destination "${buildDir}/reports/coverage"
-//        html.destination "${rootDir}/src/main/resources/reports/coverage"
+        xml.outputLocation = layout.projectDirectory.file('/src/main/resources/reports/coverage/result.xml')
+        csv.outputLocation = layout.projectDirectory.file('/src/main/resources/reports/coverage/result.csv')
+        html.outputLocation = layout.projectDirectory.dir('/src/main/resources/reports/coverage/html')
     }
 
     finalizedBy jacocoTestCoverageVerification
@@ -102,9 +104,9 @@ jacocoTestReport {
 jacocoTestCoverageVerification {
     violationRules {
         rule {
-            enabled = false
+            enabled = true
             limit {
-                minimum = 0.5
+                minimum = 0.3
             }
         }
     }

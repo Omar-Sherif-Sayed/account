@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: account
+  datasource:
+    url: jdbc:h2:mem:test
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  main:
+    allow-bean-definition-overriding: true
+
+server:
+  port: 8070
+  servlet:
+    context-path: /api/account
+
+springdoc:
+  packagesToScan: com.nagarro.account.controller
+  pathsToMatch: /v1/**
+
+log4j2:
+  skipJansi: false
+
+security:
+  admin:
+    password: admin
+  user:
+    password: user
+  jwt:
+    secret-key: gaYa9QHU4JR1t2Ty0_ZPwrsq1oHgKdFbeIHcDH4B_dw
+    token-prefix: 'Bearer '
+    token-expiration-after-minutes: 5
+
+#management:
+#  security:
+#    enabled: false
+#  health:
+#    db:
+#      enabled: false
+#
+#security:
+#  basic:
+#    enabled: false
+

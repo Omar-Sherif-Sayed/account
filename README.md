@@ -10,7 +10,7 @@ with 3 APIs Login, Logout and search.
 
 <p align="center">
 
-![Java](https://img.shields.io/badge/java-%234e7896.svg?style=for-the-badge&labelColor=#f58219&logo=java&logoColor=white)
+![Java](https://img.shields.io/badge/java-%234e7896.svg?style=for-the-badge&labelColor=#f58219&logoSvg=https%3A%2F%2Fwww.vectorlogo.zone%2Flogos%2Fjava%2Fjava-icon.svg)
 ![Spring Boot](https://img.shields.io/badge/spring_boot-%236DB33F.svg?style=for-the-badge&logo=springboot&logoColor=white&link=https://spring.io/)
 ![Spring Security](https://img.shields.io/badge/spring_security-%236DB33F.svg?style=for-the-badge&logo=springsecurity&logoColor=white)
 ![Microsoft Access](https://img.shields.io/badge/microsoft_access-%23A4373A.svg?style=for-the-badge&logo=microsoftaccess&logoColor=white)
@@ -66,7 +66,7 @@ with 3 APIs Login, Logout and search.
 - ``` /account/search ```: for getting statements last 3 months or search on it with date rang or amount rang or account
   id.
 
-### Issues I faced
+### Fixed Issues
 
 - It is not easy to run the project with sonarqube, first time it success then it is not. <br>
   you have to change the password. the default username: ``` admin ``` and password: ``` admin ```. <br>
@@ -85,14 +85,13 @@ with 3 APIs Login, Logout and search.
 - Redis repository retrieving the values by id only, that is not as expected, <br>
   I can't retrieve data by username (id) and token
 
-### In Progress
+### SonarQube result
 
-- Doing a Unit Test
-- Update The READE.md file
+![SonarQube result](src/main/resources/sonarqube/sonarqube.png)
 
-### Notes
+### Jacoco result
 
-- After doing things in (in Progress) section will be updated and deleted.
+![Jacoco result](src/main/resources/reports/coverage/jacocoTestCoverageResult.png)
 
 ### Useful URLs After running the project locally
 

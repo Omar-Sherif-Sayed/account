@@ -18,9 +18,8 @@ public class AccountRepositoryImpl implements AccountRepository {
     public List<Account> findAll() {
 
         String sql = "select ID, account_type, account_number from account";
-        List<Account> accounts = jdbcTemplate.query(sql, new AccountRowMapper());
+        return jdbcTemplate.query(sql, new AccountRowMapper());
 
-        return accounts;
     }
 
 }

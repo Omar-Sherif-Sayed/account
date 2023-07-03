@@ -1,15 +1,17 @@
 package com.nagarro.account;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatNoException;
+
 @SpringBootTest
-@Disabled
 class AccountApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void itShouldTestMainMethod() {
+        assertThatNoException()
+                .isThrownBy(() -> AccountApplication.main(new String[]{}));
+    }
 
 }

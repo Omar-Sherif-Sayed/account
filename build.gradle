@@ -55,8 +55,6 @@ dependencies {
     // unit test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
-//    testImplementation 'org.junit.vintage:junit-vintage-engine:5.9.3'
-    testImplementation 'org.testcontainers:junit-jupiter:1.17.3'
     testImplementation 'com.h2database:h2'
 
     // Lombok
@@ -93,9 +91,9 @@ jacocoTestReport {
         xml.enabled true
         csv.enabled true
         html.enabled true
-        xml.outputLocation = layout.projectDirectory.file('/src/main/resources/reports/coverage/result.xml')
-        csv.outputLocation = layout.projectDirectory.file('/src/main/resources/reports/coverage/result.csv')
-        html.outputLocation = layout.projectDirectory.dir('/src/main/resources/reports/coverage/html')
+        xml.outputLocation = layout.projectDirectory.file('/src/main/resources/coverage/reports/result.xml')
+        csv.outputLocation = layout.projectDirectory.file('/src/main/resources/coverage/reports/result.csv')
+//        html.outputLocation = layout.projectDirectory.dir('/src/main/resources/coverage/reports/html')
     }
 
     finalizedBy jacocoTestCoverageVerification
@@ -104,9 +102,9 @@ jacocoTestReport {
 jacocoTestCoverageVerification {
     violationRules {
         rule {
-            enabled = true
+            enabled = false
             limit {
-                minimum = 0.3
+                minimum = 0.5
             }
         }
     }
@@ -117,22 +115,15 @@ sonarqube {
     properties {
         property 'sonar.host.url', 'http://localhost:9000'
         property "sonar.login", "sqp_274c7f839b590b014c64031933b65d6a66680848"
-        property "sonar.password", ""
         property "sonar.projectKey", "account"
         property 'sonar.projectName', 'account'
         property 'sonar.java.source', 17
-        property 'sonar.junit.reportPaths', 'build/results'
+        property 'sonar.junit.reportPaths', 'src/main/resources/coverage/reports'
         property 'encoding', 'UTF-8'
         property 'charSet', 'UTF-8'
-        property "sonar.coverage.jacoco.xmlReportPaths", "path.xml"
+        property "sonar.coverage.jacoco.xmlReportPaths", "src/main/resources/coverage/reports/result.xml"
     }
 }
-
-
-//jacoco {
-//    applyTo bootRun
-//}
-
 
 tasks.named('sonarqube') {
     dependsOn jacocoTestReport

@@ -20,9 +20,8 @@ public class StatementRepositoryImpl implements StatementRepository {
     public List<Statement> findAll() {
 
         String sql = "select ID, account_id, datefield, amount from statement";
-        List<Statement> statementList = jdbcTemplate.query(sql, new StatementRowMapper());
+        return jdbcTemplate.query(sql, new StatementRowMapper());
 
-        return statementList;
     }
 
 }

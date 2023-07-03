@@ -24,7 +24,7 @@ public class BaseResponse<T> {
 
     private final T response;
 
-    private final boolean status = true;
+    private static boolean status = true;
 
     @JsonFormat(timezone = DateUtil.AFRICA_CAIRO_ZONE)
     private final Date currentDate = DateUtil.convertDateToCairoZone(new Date());

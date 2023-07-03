@@ -1,9 +1,5 @@
 package com.nagarro.account.security.util;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-
 public class SecurityApplicationUtil {
 
     private static String token;
@@ -11,13 +7,6 @@ public class SecurityApplicationUtil {
     private static String role;
 
     private SecurityApplicationUtil() {
-    }
-
-    private static String getJwtSubject() {
-        SecurityContext context = SecurityContextHolder.getContext();
-        Authentication authentication = context.getAuthentication();
-        var idAndEmail = authentication.getPrincipal();
-        return idAndEmail.toString();
     }
 
     public static String getToken() {

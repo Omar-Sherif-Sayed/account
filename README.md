@@ -85,13 +85,18 @@ with 3 APIs Login, Logout and search.
 - Redis repository retrieving the values by id only, that is not as expected, <br>
   I can't retrieve data by username (id) and token
 
-### SonarQube result
+### SonarQube Test Coverage result
 
-![SonarQube result](src/main/resources/sonarqube/sonarqube.png)
+![SonarQube result](src/main/resources/coverage/images/sonarqubeTestCoverageResult.png)
 
-### Jacoco result
+### Jacoco Test Coverage result
 
-![Jacoco result](src/main/resources/reports/coverage/jacocoTestCoverageResult.png)
+![Jacoco result](src/main/resources/coverage/images/jacocoTestCoverageResult.png)
+
+
+### Intellij Test Coverage result
+
+![Intellij result](src/main/resources/coverage/images/intellijTestCoverageResult.png)
 
 ### Useful URLs After running the project locally
 

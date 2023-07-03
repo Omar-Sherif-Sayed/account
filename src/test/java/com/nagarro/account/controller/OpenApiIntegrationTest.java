@@ -15,7 +15,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.testcontainers.shaded.org.apache.commons.io.IOUtils;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -57,7 +56,7 @@ class OpenApiIntegrationTest {
 
 
         try (Writer writer = new FileWriter(new File("build/swagger.json"))) {
-            IOUtils.write(contentAsString, writer);
+//            IOUtils.write(contentAsString, writer);
         }
     }
 }

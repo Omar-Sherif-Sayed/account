@@ -1,11 +1,11 @@
 package com.nagarro.account.model.response.account;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 
 import java.util.List;
 
-@Data
+@Getter
 @Builder
 public class AccountResponse {
 

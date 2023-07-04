@@ -1,5 +1,6 @@
 package com.nagarro.account.service.auth.impl;
 
+import com.nagarro.account.entity.auth.UserCacheEntity;
 import com.nagarro.account.exception.BaseException;
 import com.nagarro.account.model.request.auth.LoginRequest;
 import com.nagarro.account.model.response.auth.LoginResponse;
@@ -15,6 +16,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+
+import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -66,6 +69,20 @@ class AuthServiceImplTest {
         assertThat(loginResponse.getToken())
                 .startsWith("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiYXV");
 
+        Optional<UserCacheEntity> user = userCacheRepository.findById("user");
+
+        assertThat(user)
+                .isPresent();
+
+        UserCacheEntity userCacheEntity = user.orElse(null);
+
+        assert userCacheEntity != null;
+
+        assertThat(userCacheEntity.getUsername())
+                .isEqualTo("user");
+
+        assertThat(userCacheEntity.getToken())
+                .startsWith("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiYXV");
     }
 
     @Test

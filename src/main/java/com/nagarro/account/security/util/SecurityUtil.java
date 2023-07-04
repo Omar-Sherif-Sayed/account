@@ -4,7 +4,10 @@ import org.springframework.http.HttpHeaders;
 
 import java.util.List;
 
-public final class SecurityUtil {
+public class SecurityUtil {
+
+    private SecurityUtil() {
+    }
 
     public static final String[] antMatchers = {
             "/v2/api-docs",
@@ -26,8 +29,5 @@ public final class SecurityUtil {
             HttpHeaders.CACHE_CONTROL,
             HttpHeaders.CONTENT_TYPE,
             HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN);
-
-    private SecurityUtil() {
-    }
 
 }

@@ -7,7 +7,6 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
@@ -23,12 +22,6 @@ public class DateUtil {
 
     public static LocalDateTime getCairoZonedLocalDateTime() {
         return LocalDateTime.now(ZoneId.of(AFRICA_CAIRO_ZONE));
-    }
-
-    public static Date getCairoZonedDate() {
-        return Date
-                .from(getCairoZonedLocalDateTime()
-                        .toInstant(ZoneOffset.of(AFRICA_CAIRO_ZONE)));
     }
 
     public static Date convertLocalDateTimeToCairoZone(LocalDateTime localDateTime) {
